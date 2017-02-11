@@ -1,4 +1,7 @@
-
+.espacebottom
+{
+    margin-bottom: 20px;
+}
 .invisible
 {
     display:none

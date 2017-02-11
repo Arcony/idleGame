@@ -135,13 +135,13 @@ function load()
 
 
     ////////////////UPGRADE
-    var elem1 = '<button class="btn btn-info btn-lg extra-lg" id=spidersEffUp onclick=upEff(spiders)> Upgrade Spiders <br/>'+spiders.nextEffCost+' golds</button> ';
-    var elem2 = '<button class="btn btn-info btn-lg extra-lg" id=skeletonsEffUp onclick=upEff(skeletons)> Upgrade Skeletons  <br/>'+skeletons.nextEffCost+' golds </button>';
-    var elem3 = '<button class="btn btn-info btn-lg extra-lg" id=goblinsEffUp onclick=upEff(goblins)> Upgrade Goblins  <br/>'+goblins.nextEffCost+' golds </button>  ';
+    var elem1 = '<br /><button class="btn btn-info btn-lg extra-lg espacebottom" id=spidersEffUp onclick=upEff(spiders)> Upgrade Spiders <br/>'+spiders.nextEffCost+' golds</button> ';
+    var elem2 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id=skeletonsEffUp onclick=upEff(skeletons)> Upgrade Skeletons  <br/>'+skeletons.nextEffCost+' golds </button>';
+    var elem3 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id=goblinsEffUp onclick=upEff(goblins)> Upgrade Goblins  <br/>'+goblins.nextEffCost+' golds </button>  ';
     ///////
     ////////////////UNLOCK
-    var elem10 = '<button class="btn btn-info btn-lg extra-lg"  id=skeletonsUnlock onclick=unlock(skeletons)> Unlock Skeleton <br/>'+skeletons.unlockCost+' golds  </button>';
-    var elem20 = '<button class="btn btn-info btn-lg extra-lg" id=goblinsUnlock onclick=unlock(goblins)> Unlock Goblin <br/>'+goblins.unlockCost+' golds  </button> ';
+    var elem10 = '<br /><button class="btn btn-info btn-lg extra-lg espacebottom"  id=skeletonsUnlock onclick=unlock(skeletons)> Unlock Skeleton <br/>'+skeletons.unlockCost+' golds  </button>';
+    var elem20 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id=goblinsUnlock onclick=unlock(goblins)> Unlock Goblin <br/>'+goblins.unlockCost+' golds  </button> ';
 
     //////
     //var elem2 = '<div class="upbar-container"> <div class="upbar" id=spiderEffBar></div></div>';
@@ -357,12 +357,17 @@ function engine(){
         $("#skeletonDiv").addClass("invisible");
 
 
+
+
     document.getElementById('unlockable').innerHTML="";
     if (!goblins.unlock)
     {
         if(golds >= goblins.unlockCost) { document.getElementById('unlockable').innerHTML="!"; }
     }
-
+    if (!skeletons.unlock)
+    {
+        if(golds >= skeletons.unlockCost) { document.getElementById('unlockable').innerHTML="!"; }
+    }
     setTimeout(engine,1000/FPS);
 }
 engine();
