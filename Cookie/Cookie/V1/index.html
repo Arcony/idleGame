@@ -1,0 +1,51 @@
+<html>
+<head>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="interface.css" />
+</head>
+<body onload="load()">
+<button onclick="monsterClick(1)">Pundle Village</button>
+<br />
+Golds: <span id="golds">0</span>
+
+<br />
+<br />
+
+<!--Spider-->
+<button id="btnBuySpider" onclick="buySpider()">Buy Spider</button>
+<br />
+Spiders: <span id="spiders">0</span>
+<br />
+Spider Cost: <span id="spiderCost">10</span>
+<!--/Spider-->
+
+<br />
+<br />
+<!--Goblin-->
+<button id="btnBuyGoblin" onclick="buyGoblin()">Buy Goblin</button>
+<br />
+Goblins: <span id="goblins">0</span>
+<br />
+Goblin Cost: <span id="goblinCost">100</span>
+<!--/Goblin-->
+<br />
+<br />
+<script type="text/javascript" src="main.js"></script>
+
+<button onclick="Save()">Save</button>
+<br />
+<button onclick="Delete()">Delete</button>
+<br />
+
+<div id="navbar">
+	<ul>
+		<li><a href="#unlockTab">Unlockables</a></li>
+		<li><a href="#upgradesTab">Upgrades</a></li>
+		<li><a href="#settingsTab">Settings</a></li>
+		<li><a href="#creditsTab">Credits</a></li>
+	</ul>
+</div>
+
+
+</body>
+</html>

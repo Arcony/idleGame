@@ -1,0 +1,38 @@
+
+.invisible
+{
+    display:none
+}
+.disabled {
+    pointerEvents: "none",
+}
+
+.right
+{
+float:right;
+}
+
+body
+{
+background-color:#999999;
+}
+
+
+#contents menu {
+  display: none;
+}
+
+#contents menu:target {
+  display: block;
+      top: 6%;
+}
+
+#unlockable
+{
+    background-color:#D9534F;
+}
+
+.extra-lg
+{
+    width : 100%;
+}

@@ -1,0 +1,61 @@
+.invisible
+{
+    visibility: hidden;
+}
+.disabled {
+    pointerEvents: "none",
+}
+
+.right
+{
+float:right;
+}
+body
+{
+background-color:#999999;
+}
+#navbar {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+
+}
+
+#navbar > ul > li {
+
+  list-style-type: none;
+  display: block;
+  float: left;
+  padding: 10px;
+  background-color: #333;
+}
+#navbar > ul > li > a {
+  text-decoration: none;
+  color: white;
+}
+#navbar > ul > li:hover {
+  background-color: #111;
+}
+
+
+#contents menu {
+  display: none;
+}
+
+#contents menu:target {
+  display: block;
+      top: 6%;
+}
+/*
+button {
+width:200px;
+  border: none;
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.4s cubic-bezier(0,0,1,0);
+}*/
