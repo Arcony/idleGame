@@ -121,7 +121,7 @@ function load()
         document.getElementById('spiders').innerHTML = prettify(spiders.number);
         document.getElementById('spiderCost').innerHTML = prettify(spiders.nextCost);
         ////
-        document.getElementById('goblinCost').innerHTML = prettify(goblins.nextCost);
+        document.getElementById('goblinsCost').innerHTML = prettify(goblins.nextCost);
         document.getElementById('goblins').innerHTML = prettify(goblins.number);
         /////
         document.getElementById('skeletons').innerHTML = prettify(skeletons.number);
@@ -189,25 +189,25 @@ function monsterClick(number){
 
 
 
-function buySpider(){
+function buyMonster(monster){
 
-    if(golds >= spiders.nextCost){                                   //checks that the player can afford the spider
-        spiders.number = spiders.number + 1;                                   //increases number of spiders
-        golds = golds - spiders.nextCost;                          //removes the cookies spent
-        document.getElementById('spiders').innerHTML = spiders.number;  //updates the number of spiders for the user
+    if(golds >= monster.nextCost){                                   //checks that the player can afford the spider
+        monster.number = monster.number + 1;                                   //increases number of monster
+        golds = golds - monster.nextCost;                          //removes the cookies spent
+        console.log(monster);
+        document.getElementById(monster.name).innerHTML = monster.number;  //updates the number of monster for the user
         document.getElementById('golds').innerHTML = prettify(golds);  //updates the number of cookies for the user
 
-        var nextCost = Math.floor( spiders.nextCost * Math.pow(1.1,spiders.number));       //works out the cost of the next spider
-        document.getElementById('spiderCost').innerHTML = nextCost;  //updates the spider cost for the user
-        spiders.nextCost = nextCost;
-        console.log("Position x");
+        var nextCost = Math.floor( monster.nextCost * 1.2);       //works out the cost of the next spider
+        document.getElementById(monster.name+'Cost').innerHTML = nextCost;  //updates the spider cost for the user
+        monster.nextCost = nextCost;
     };
 };
 
 
 
 
-
+/*
 function buySkeleton(){
     if(golds >= skeletons.nextCost){                                   //checks that the player can afford the spider
         skeletons.number= skeletons.number + 1;                                   //increases number of spiders
@@ -232,7 +232,7 @@ function buyGoblin(){
         document.getElementById('goblinCost').innerHTML = nextCost;//updates the spider cost for the user
         goblins.nextCost = nextCost;
     };
-}
+}*/
 
 function upEff(monster)
 {
