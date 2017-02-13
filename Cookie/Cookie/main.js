@@ -1,6 +1,8 @@
-var golds = 0;
+var golds = 200;
 var spiders =
     {
+        nameSingle : "spider",
+        nameSinglePrettify : "Spider",
         namePrettify : "Spiders",
         name : "spiders",
         number : 0,
@@ -14,6 +16,8 @@ var spiders =
     }
 
 var skeletons = {
+    nameSinglePrettify : "Skeleton",
+    nameSingle : "skeleton",
     namePrettify : "Skeletons",
     name : "skeletons",
     number : 0,
@@ -27,6 +31,8 @@ var skeletons = {
 }
 
 var goblins = {
+    nameSinglePrettify : "Goblin",
+    nameSingle : "goblin",
     namePrettify : "Goblins",
     name : "goblins",
     number : 0,
@@ -38,6 +44,8 @@ var goblins = {
     unlock : false,
     unlockCost:2000,
 }
+
+var monsterTab = [ spiders , skeletons , goblins];
 
 
 
@@ -89,6 +97,7 @@ function Delete()
 function load()
 {
     var saved = JSON.parse(localStorage.getItem("save"));
+
     if(saved)
     {
         //////////////////////SPIDER
@@ -118,19 +127,70 @@ function load()
         //////////////////////////////
 
 
+        monsterTab.forEach(function(element) {
+
+            if( element.unlock )
+            {
+                var elem1 = '<div id= "'+element.nameSingle+'Div">';
+                var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
+                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                $('#interfaceLeft').append(elem1);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+            }
+            else
+            {
+                var elem1 = '<div class="invisible" id= "'+element.nameSingle+'Div">';
+                var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg invisible" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
+                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                $('#interfaceLeft').append(elem1);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+            }
+
+        });
+
+
         document.getElementById('spiders').innerHTML = prettify(spiders.number);
-        document.getElementById('spiderCost').innerHTML = prettify(spiders.nextCost);
+        document.getElementById('spidersCost').innerHTML = prettify(spiders.nextCost);
         ////
         document.getElementById('goblinsCost').innerHTML = prettify(goblins.nextCost);
         document.getElementById('goblins').innerHTML = prettify(goblins.number);
         /////
         document.getElementById('skeletons').innerHTML = prettify(skeletons.number);
-        document.getElementById('skeletonCost').innerHTML = prettify(skeletons.nextCost);
+        document.getElementById('skeletonsCost').innerHTML = prettify(skeletons.nextCost);
         ////
 
         if (typeof saved.prestige !== "undefined") prestige = saved.prestige;
         document.getElementById('golds').innerHTML = prettify(golds);
 
+
+
+    }
+    else
+    {
+        monsterTab.forEach(function(element) {
+
+            if( element.unlock )
+            {
+                var elem1 = '<div id= "'+element.nameSingle+'Div">';
+                var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
+                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                $('#interfaceLeft').append(elem1);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+            }
+            else
+            {
+                var elem1 = '<div class="invisible" id= "'+element.nameSingle+'Div">';
+                var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
+                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                $('#interfaceLeft').append(elem1);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+            }
+
+        });
     }
 
 
@@ -299,21 +359,21 @@ window.setInterval(function(){
 function engine(){
 
     if ( golds >= spiders.nextCost){
-        $("#btnBuySpider").removeClass("disabled");
+        $("#btnBuySpiders").removeClass("disabled");
     }else
-        $("#btnBuySpider").addClass("disabled");
+        $("#btnBuySpiders").addClass("disabled");
 
 
     if ( golds >= skeletons.nextCost){
-        $("#btnBuySkeleton").removeClass("disabled");
+        $("#btnBuySkeletons").removeClass("disabled");
     }else
-        $("#btnBuySkeleton").addClass("disabled");
+        $("#btnBuySkeletons").addClass("disabled");
 
 
     if ( golds >= goblins.nextCost){
-        $("#btnBuyGoblin").removeClass("disabled");
+        $("#btnBuyGoblins").removeClass("disabled");
     }else
-        $("#btnBuyGoblin").addClass("disabled");
+        $("#btnBuyGoblins").addClass("disabled");
 
 
     //////////////////////////////**/
