@@ -9,7 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="interface.css" />
 
 
-
+	<link rel="icon" href="piece.png" type="image/x-icon" />
+	<title id="titletext"> - 0 golds </title>
 
 </head>
 <body onload="load()">
@@ -45,56 +46,14 @@
 			<div class="col-lg-2">
 			</div>
 			<div  id="interfaceLeft" class="col-lg-10">
+				<span class="badge" id="golds">0 <i>  </i></span> <img src="piece.png" alt="golds" height="30" width="30">
 				<br /> <br/>
 				<button class="btn btn-primary btn-lg extra-lg" onclick="monsterClick(1)">Pundle Village</button>
 				<br />
-				Golds: <span class="badge" id="golds">0</span>
+
 
 				<br />
 				<br />
-
-
-				<!--&lt;!&ndash;Spider&ndash;&gt;-->
-				<!--<div id="spiderDiv">-->
-					<!--<button id="btnBuySpider" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster(spiders)">Buy Spider</button>-->
-					<!--<br />-->
-					<!--Spiders: <span class="badge" id="spiders">0</span>-->
-					<!--<br />-->
-					<!--Spider Cost: <span class="badge" id="spidersCost">15</span>-->
-					<!--<br />-->
-					<!--<br />-->
-				<!--</div>-->
-				<!--&lt;!&ndash;/Spider&ndash;&gt;-->
-
-
-
-				<!--&lt;!&ndash;////Skeleton&ndash;&gt;-->
-				<!--<div id="skeletonDiv" class="invisible">-->
-					<!--<button id="btnBuySkeleton" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster(skeletons)">Buy Skeleton</button>-->
-					<!--<br />-->
-					<!--Skeletons <span id="skeletons" class="badge">0</span><br>-->
-					<!--Skeleton Cost: <span id="skeletonsCost" class="badge">100</span>-->
-					<!--<br />-->
-					<!--<br />-->
-				<!--</div>-->
-				<!--&lt;!&ndash;Skeleton&ndash;&gt;-->
-
-
-
-
-				<!--&lt;!&ndash;Goblin&ndash;&gt;-->
-				<!--<div id="goblinDiv" class="invisible">-->
-					<!--<button id="btnBuyGoblin" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster(goblins)">Buy Goblin</button>-->
-					<!--<br />-->
-					<!--Goblins <span id="goblins" class="badge">0</span><br>-->
-					<!--Goblin Cost: <span id="goblinsCost" class="badge">1000</span>-->
-					<!--<br />-->
-					<!--<br />-->
-				<!--</div>-->
-				<!--&lt;!&ndash;/Gobelin&ndash;&gt;-->
-
-
-
 			</div>
 		</div>
 	</div>
@@ -112,7 +71,7 @@
 				</menu>
 
 				<menu id="upgradesTab">
-
+					<br />
 				</menu>
 
 				<menu id="settingsTab">

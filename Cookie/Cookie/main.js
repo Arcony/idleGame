@@ -1,4 +1,4 @@
-var golds = 200;
+var golds = 2000;
 var spiders =
     {
         nameSingle : "spider",
@@ -84,6 +84,7 @@ function Save()
             unlock : goblins.unlock,
         },
 
+
         prestige: prestige,
     }
     localStorage.setItem("save",JSON.stringify(save));
@@ -100,43 +101,19 @@ function load()
 
     if(saved)
     {
-        /*monsterTab.forEach(function(element) {
+        monsterTab.forEach(function(element) {
     console.log(element.name);
-            if (typeof saved.element.name.number !== "undefined") element.number = saved.element.number;
-            if (typeof saved.element.nextCost !== "undefined") element.nextCost = saved.element.nextCost;
-            if (typeof saved.element.efficiency !== "undefined") element.efficiency = saved.element.efficiency;
-            if (typeof saved.element.nextEffCost !== "undefined") element.nextEffCost = saved.element.nextEffCost;
-            if (typeof saved.element.unlock !== "undefined") element.unlock = saved.element.unlock;
+    console.log(saved);
 
-        });*/
+            if (typeof saved[element.name].number !== "undefined") element.number = saved[element.name].number;
+            if (typeof saved[element.name].nextCost !== "undefined") element.nextCost = saved[element.name].nextCost;
+            if (typeof saved[element.name].efficiency !== "undefined") element.efficiency = saved[element.name].efficiency;
+            if (typeof saved[element.name].nextEffCost !== "undefined") element.nextEffCost = saved[element.name].nextEffCost;
+            if (typeof saved[element.name].unlock !== "undefined") element.unlock = saved[element.name].unlock;
+
+        });
 
         if (typeof saved.golds !== "undefined") golds = saved.golds;
-        //////////////////////SPIDER
-
-        if (typeof saved.spiders.number !== "undefined") spiders.number = saved.spiders.number;
-        if (typeof saved.spiders.nextCost !== "undefined") spiders.nextCost = saved.spiders.nextCost;
-        if (typeof saved.spiders.efficiency !== "undefined") spiders.efficiency = saved.spiders.efficiency;
-        if (typeof saved.spiders.nextEffCost !== "undefined") spiders.nextEffCost = saved.spiders.nextEffCost;
-        if (typeof saved.spiders.unlock !== "undefined") spiders.unlock = saved.spiders.unlock;
-
-        ////////////////**/GOBLIN
-        if (typeof saved.goblins.number !== "undefined") goblins.number = saved.goblins.number;
-        if (typeof saved.goblins.nextCost !== "undefined") goblins.nextCost = saved.goblins.nextCost;
-        if (typeof saved.goblins.efficiency !== "undefined") goblins.efficiency = saved.goblins.efficiency;
-        if (typeof saved.goblins.nextEffCost !== "undefined") goblins.nextEffCost = saved.goblins.nextEffCost;
-        if (typeof saved.goblins.unlock !== "undefined") goblins.unlock = saved.goblins.unlock;
-
-
-
-        ///////////////////////////SKELETON
-
-        if (typeof saved.skeletons.number !== "undefined") skeletons.number = saved.skeletons.number;
-        if (typeof saved.skeletons.nextCost !== "undefined") skeletons.nextCost = saved.skeletons.nextCost;
-        if (typeof saved.skeletons.efficiency !== "undefined") skeletons.efficiency = saved.skeletons.efficiency;
-        if (typeof saved.skeletons.nextEffCost !== "undefined") skeletons.nextEffCost = saved.skeletons.nextEffCost;
-        if (typeof saved.skeletons.unlock !== "undefined") skeletons.unlock = saved.skeletons.unlock;
-        //////////////////////////////
-
 
         monsterTab.forEach(function(element) {
 
@@ -144,20 +121,23 @@ function load()
             {
                 var elem1 = '<div id= "'+element.nameSingle+'Div">';
                 var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
-                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
-                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br /><br />';
+                //var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
                 $('#interfaceLeft').append(elem1);
-                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3);
             }
             else
             {
                 var elem1 = '<div class="invisible" id= "'+element.nameSingle+'Div">';
                 var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg invisible" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
-                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
-                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br /><br />';
+               //var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
                 $('#interfaceLeft').append(elem1);
-                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3);
             }
+            var test = '<br /><img src="piece.png" alt="golds" height="20" width="20">  <span id="'+element.name+'Cost">'+element.nextCost+'</span> ';
+            $('#btnBuy'+element.namePrettify+'').append(test);
+
 
         });
 
@@ -182,54 +162,39 @@ function load()
             {
                 var elem1 = '<div id= "'+element.nameSingle+'Div">';
                 var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
-                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
-                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br /><br />';
+                //var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
                 $('#interfaceLeft').append(elem1);
-                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3);
             }
             else
             {
                 var elem1 = '<div class="invisible" id= "'+element.nameSingle+'Div">';
                 var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
-                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br />';
-                var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
+                var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br /><br />';
+                //var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
                 $('#interfaceLeft').append(elem1);
-                $('#'+element.nameSingle+'Div').append(elem2,elem3,elem4);
+                $('#'+element.nameSingle+'Div').append(elem2,elem3);
+
+
             }
+            var test = '<br /><img src="piece.png" alt="golds" height="20" width="20">  <span id="'+element.name+'Cost">'+element.nextCost+'</span> ';
+            $('#btnBuy'+element.namePrettify+'').append(test);
 
         });
     }
 
+
+
     monsterTab.forEach(function(element) {
 
-        var elem = '<br /><button class="btn btn-info btn-lg extra-lg espacebottom" id='+element.name+'EffUp onclick=upEff('+element.name+')> Upgrade '+element.namePrettify+' <br/>'+element.nextEffCost+' golds</button> ';
+        var elem = '<button class="btn btn-info btn-lg extra-lg espacebottom" id='+element.name+'EffUp onclick=upEff('+element.name+')> Upgrade '+element.namePrettify+' <br/>'+element.nextEffCost+' golds</button> ';
         $('#upgradesTab').append(elem);
         var elem2 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id='+element.name+'Unlock onclick=unlock('+element.name+')> Unlock '+element.namePrettify+' <br/>'+element.unlockCost+' golds  </button>';
         $('#unlockTab').append(elem2);
     });
 
-    if(goblins.unlock)
-    {
-        $("#goblinsUnlock").addClass("invisible");
-        $("#goblinsEffUp").removeClass("invisible");
-    }
-    else
-    {
-        $("#goblinsUnlock").removeClass("invisible");
-        $("#goblinsEffUp").addClass("invisible");
-    }
 
-    //////////////////////
-    if(skeletons.unlock)
-    {
-        $("#skeletonsUnlock").addClass("invisible");
-        $("#skeletonsEffUp").removeClass("invisible");
-    }
-    else
-    {
-        $("#skeletonsUnlock").removeClass("invisible");
-        $("#skeletonsEffUp").addClass("invisible");
-    }
 
 }
 
@@ -306,7 +271,9 @@ function prettify(input){
 window.setInterval(function(){
 
     monsterClick((spiders.number/10)*spiders.efficiency);
-    monsterClick((goblins.number)*goblins.efficiency);
+    monsterClick((skeletons.number)*skeletons.efficiency);
+    monsterClick((goblins.number)*goblins.efficiency*8);
+
 
 
 }, 1000);
@@ -358,25 +325,39 @@ function engine(){
 
         if( element.unlock )
         {
-            $('#'+element.nameSingle+'Div').removeClass("disabled");
+            $('#'+element.nameSingle+'Div').removeClass("invisible");
         }
         else
-            $('#'+element.nameSingle+'Div').addClass("disabled");
+            $('#'+element.nameSingle+'Div').addClass("invisible");
 
+
+        if(element.unlock)
+        {
+            $('#'+element.name+'Unlock').addClass("invisible");
+            $('#'+element.name+'EffUp').removeClass("invisible");
+            $('#btnBuy'+element.namePrettify+'').removeClass("invisible");
+        }
+        else
+        {
+            $('#'+element.name+'Unlock').removeClass("invisible");
+            $('#'+element.name+'EffUp').addClass("invisible");
+            $('#btnBuy'+element.namePrettify+'').addClass("invisible");
+        }
 
     });
 
 
+    monsterTab.forEach(function(element) {
 
-    document.getElementById('unlockable').innerHTML="";
-    if (!goblins.unlock)
-    {
-        if(golds >= goblins.unlockCost) { document.getElementById('unlockable').innerHTML="!"; }
-    }
-    if (!skeletons.unlock)
-    {
-        if(golds >= skeletons.unlockCost) { document.getElementById('unlockable').innerHTML="!"; }
-    }
+        document.getElementById('unlockable').innerHTML="";
+        if (!element.unlock)
+        {
+            if(golds >= element.unlockCost) { document.getElementById('unlockable').innerHTML="!"; }
+        }
+    });
+
+
+    document.getElementById('titletext').innerHTML= ""+prettify(golds)+" golds";
     setTimeout(engine,1000/FPS);
 }
 engine();
