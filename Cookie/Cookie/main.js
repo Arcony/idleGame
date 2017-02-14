@@ -100,8 +100,19 @@ function load()
 
     if(saved)
     {
-        //////////////////////SPIDER
+        /*monsterTab.forEach(function(element) {
+    console.log(element.name);
+            if (typeof saved.element.name.number !== "undefined") element.number = saved.element.number;
+            if (typeof saved.element.nextCost !== "undefined") element.nextCost = saved.element.nextCost;
+            if (typeof saved.element.efficiency !== "undefined") element.efficiency = saved.element.efficiency;
+            if (typeof saved.element.nextEffCost !== "undefined") element.nextEffCost = saved.element.nextEffCost;
+            if (typeof saved.element.unlock !== "undefined") element.unlock = saved.element.unlock;
+
+        });*/
+
         if (typeof saved.golds !== "undefined") golds = saved.golds;
+        //////////////////////SPIDER
+
         if (typeof saved.spiders.number !== "undefined") spiders.number = saved.spiders.number;
         if (typeof saved.spiders.nextCost !== "undefined") spiders.nextCost = saved.spiders.nextCost;
         if (typeof saved.spiders.efficiency !== "undefined") spiders.efficiency = saved.spiders.efficiency;
@@ -151,15 +162,11 @@ function load()
         });
 
 
-        document.getElementById('spiders').innerHTML = prettify(spiders.number);
-        document.getElementById('spidersCost').innerHTML = prettify(spiders.nextCost);
-        ////
-        document.getElementById('goblinsCost').innerHTML = prettify(goblins.nextCost);
-        document.getElementById('goblins').innerHTML = prettify(goblins.number);
-        /////
-        document.getElementById('skeletons').innerHTML = prettify(skeletons.number);
-        document.getElementById('skeletonsCost').innerHTML = prettify(skeletons.nextCost);
-        ////
+        monsterTab.forEach(function(element) {
+
+            document.getElementById(''+element.name+'').innerHTML = prettify(element.number);
+            document.getElementById(''+element.name+'Cost').innerHTML = prettify(element.nextCost);
+        });
 
         if (typeof saved.prestige !== "undefined") prestige = saved.prestige;
         document.getElementById('golds').innerHTML = prettify(golds);
@@ -193,21 +200,13 @@ function load()
         });
     }
 
+    monsterTab.forEach(function(element) {
 
-    ////////////////UPGRADE
-    var elem1 = '<br /><button class="btn btn-info btn-lg extra-lg espacebottom" id=spidersEffUp onclick=upEff(spiders)> Upgrade Spiders <br/>'+spiders.nextEffCost+' golds</button> ';
-    var elem2 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id=skeletonsEffUp onclick=upEff(skeletons)> Upgrade Skeletons  <br/>'+skeletons.nextEffCost+' golds </button>';
-    var elem3 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id=goblinsEffUp onclick=upEff(goblins)> Upgrade Goblins  <br/>'+goblins.nextEffCost+' golds </button>  ';
-    ///////
-    ////////////////UNLOCK
-    var elem10 = '<br /><button class="btn btn-info btn-lg extra-lg espacebottom"  id=skeletonsUnlock onclick=unlock(skeletons)> Unlock Skeleton <br/>'+skeletons.unlockCost+' golds  </button>';
-    var elem20 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id=goblinsUnlock onclick=unlock(goblins)> Unlock Goblin <br/>'+goblins.unlockCost+' golds  </button> ';
-
-    //////
-    //var elem2 = '<div class="upbar-container"> <div class="upbar" id=spiderEffBar></div></div>';
-    $('#upgradesTab').append(elem1,elem2,elem3);
-    $('#unlockTab').append(elem10,elem20);
-    //var price = spiders.nextCost;
+        var elem = '<br /><button class="btn btn-info btn-lg extra-lg espacebottom" id='+element.name+'EffUp onclick=upEff('+element.name+')> Upgrade '+element.namePrettify+' <br/>'+element.nextEffCost+' golds</button> ';
+        $('#upgradesTab').append(elem);
+        var elem2 = '<button class="btn btn-info btn-lg extra-lg espacebottom" id='+element.name+'Unlock onclick=unlock('+element.name+')> Unlock '+element.namePrettify+' <br/>'+element.unlockCost+' golds  </button>';
+        $('#unlockTab').append(elem2);
+    });
 
     if(goblins.unlock)
     {
@@ -233,11 +232,6 @@ function load()
     }
 
 }
-
-
-
-
-
 
 
 function monsterClick(number){
@@ -267,33 +261,6 @@ function buyMonster(monster){
 
 
 
-/*
-function buySkeleton(){
-    if(golds >= skeletons.nextCost){                                   //checks that the player can afford the spider
-        skeletons.number= skeletons.number + 1;                                   //increases number of spiders
-        golds = golds - skeletons.nextCost;                          //removes the cookies spent
-        document.getElementById('skeletons').innerHTML = skeletons.number;  //updates the number of spiders for the user
-        document.getElementById('golds').innerHTML = prettify(golds);  //updates the number of cookies for the user
-
-        var nextCost = Math.floor(100 * Math.pow(1.1,skeletons.number));       //works out the cost of the next spider
-        document.getElementById('skeletonCost').innerHTML = nextCost;//updates the spider cost for the user
-        skeletons.nextCost = nextCost;
-    };
-}
-
-function buyGoblin(){
-    if(golds >= goblins.nextCost){                                   //checks that the player can afford the spider
-        goblins.number= goblins.number + 1;                                   //increases number of spiders
-        golds = golds - goblins.nextCost;                          //removes the cookies spent
-        document.getElementById('goblins').innerHTML = goblins.number;  //updates the number of spiders for the user
-        document.getElementById('golds').innerHTML = prettify(golds);  //updates the number of cookies for the user
-
-        var nextCost = Math.floor(1000 * Math.pow(1.1,goblins.number));       //works out the cost of the next spider
-        document.getElementById('goblinCost').innerHTML = nextCost;//updates the spider cost for the user
-        goblins.nextCost = nextCost;
-    };
-}*/
-
 function upEff(monster)
 {
     if(golds > monster.nextEffCost)
@@ -322,10 +289,6 @@ function unlock(monster){
         document.getElementById('golds').innerHTML = prettify(golds);
     }
 }
-
-
-
-/////* UTILITY */
 
 function prettify(input){
     var output = input;
@@ -358,64 +321,50 @@ window.setInterval(function(){
 
 function engine(){
 
-    if ( golds >= spiders.nextCost){
-        $("#btnBuySpiders").removeClass("disabled");
-    }else
-        $("#btnBuySpiders").addClass("disabled");
 
 
-    if ( golds >= skeletons.nextCost){
-        $("#btnBuySkeletons").removeClass("disabled");
-    }else
-        $("#btnBuySkeletons").addClass("disabled");
+    monsterTab.forEach(function(element) {
+
+        if( golds >= element.nextCost)
+        {
+            $('#btnBuy'+element.namePrettify+'').removeClass("disabled");
+        }
+        else
+            $('#btnBuy'+element.namePrettify+'').addClass("disabled");
 
 
-    if ( golds >= goblins.nextCost){
-        $("#btnBuyGoblins").removeClass("disabled");
-    }else
-        $("#btnBuyGoblins").addClass("disabled");
+        if(golds >= element.nextEffCost)
+        {
+            $('#'+element.name+'EffUp').removeClass("disabled");
+        }
+        else
+            $('#'+element.name+'EffUp').addClass("disabled");
+
+        if(golds >= goblins.unlockCost)
+        {
+            $('#'+element.name+'Unlock').removeClass("disabled");
+        }
+        else
+            $('#'+element.name+'Unlock').addClass("disabled");
 
 
-    //////////////////////////////**/
-    if ( golds >= spiders.nextEffCost){
-        $("#spidersEffUp").removeClass("disabled");
-    }else
-        $("#spidersEffUp").addClass("disabled");
-
-    if ( golds >= goblins.nextEffCost){
-        $("#goblinsEffUp").removeClass("disabled");
-    }else
-        $("#goblinsEffUp").addClass("disabled");
-
-    if ( golds >= skeletons.nextEffCost){
-        $("#skeletonsEffUp").removeClass("disabled");
-    }else
-        $("#skeletonsEffUp").addClass("disabled");
-
-    /**/
-    if ( golds >= goblins.unlockCost){
-        $("#goblinsUnlock").removeClass("disabled");
-    }else
-        $("#goblinsUnlock").addClass("disabled");
-
-    if ( golds >= skeletons.unlockCost){
-        $("#skeletonsUnlock").removeClass("disabled");
-    }else
-        $("#skeletonsUnlock").addClass("disabled");
+        if(golds >= goblins.unlockCost)
+        {
+            $('#'+element.name+'Unlock').removeClass("disabled");
+        }
+        else
+            $('#'+element.name+'Unlock').addClass("disabled");
 
 
-    /**/
-    if (goblins.unlock){
-        $("#goblinDiv").removeClass("invisible");
-    }
-    else
-        $("#goblinDiv").addClass("invisible");
+        if( element.unlock )
+        {
+            $('#'+element.nameSingle+'Div').removeClass("disabled");
+        }
+        else
+            $('#'+element.nameSingle+'Div').addClass("disabled");
 
-    if (skeletons.unlock){
-        $("#skeletonDiv").removeClass("invisible");
-    }else
-        $("#skeletonDiv").addClass("invisible");
 
+    });
 
 
 

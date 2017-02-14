@@ -1,0 +1,60 @@
+
+    //
+    // if ( golds >= spiders.nextCost){
+    //     $("#btnBuySpiders").removeClass("disabled");
+    // }else
+    //     $("#btnBuySpiders").addClass("disabled");
+    //
+    //
+    // if ( golds >= skeletons.nextCost){
+    //     $("#btnBuySkeletons").removeClass("disabled");
+    // }else
+    //     $("#btnBuySkeletons").addClass("disabled");
+    //
+    //
+    // if ( golds >= goblins.nextCost){
+    //     $("#btnBuyGoblins").removeClass("disabled");
+    // }else
+    //     $("#btnBuyGoblins").addClass("disabled");
+
+
+    //////////////////////////////**/
+    // if ( golds >= spiders.nextEffCost){
+    //     $("#spidersEffUp").removeClass("disabled");
+    // }else
+    //     $("#spidersEffUp").addClass("disabled");
+    //
+    // if ( golds >= goblins.nextEffCost){
+    //     $("#goblinsEffUp").removeClass("disabled");
+    // }else
+    //     $("#goblinsEffUp").addClass("disabled");
+    //
+    // if ( golds >= skeletons.nextEffCost){
+    //     $("#skeletonsEffUp").removeClass("disabled");
+    // }else
+    //     $("#skeletonsEffUp").addClass("disabled");
+
+    // if ( golds >= goblins.unlockCost){
+    //     $("#goblinsUnlock").removeClass("disabled");
+    // }else
+    //     $("#goblinsUnlock").addClass("disabled");
+    //
+    // if ( golds >= skeletons.unlockCost){
+    //     $("#skeletonsUnlock").removeClass("disabled");
+    // }else
+    //     $("#skeletonsUnlock").addClass("disabled");
+    //
+
+    // /**/
+    // if (goblins.unlock){
+    //     $("#goblinDiv").removeClass("invisible");
+    // }
+    // else
+    //     $("#goblinDiv").addClass("invisible");
+    //
+    // if (skeletons.unlock){
+    //     $("#skeletonDiv").removeClass("invisible");
+    // }else
+    //     $("#skeletonDiv").addClass("invisible");
+    //
+
