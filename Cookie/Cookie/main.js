@@ -1,4 +1,4 @@
-var golds = 2000;
+var golds = 99999999;
 var spiders =
     {
         nameSingle : "spider",
@@ -45,7 +45,37 @@ var goblins = {
     unlockCost:2000,
 }
 
-var monsterTab = [ spiders , skeletons , goblins];
+var zombies = {
+    nameSinglePrettify : "Zombie",
+    nameSingle : "zombie",
+    namePrettify : "Zombies",
+    name : "zombies",
+    number : 0,
+    profit : 16,
+    efficiency : 1,
+    efficiencyMax : 25,
+    nextCost : 15000,
+    nextEffCost : 50000,
+    unlock : false,
+    unlockCost:20000,
+}
+
+var liches = {
+    nameSinglePrettify : "Liche",
+    nameSingle : "liche",
+    namePrettify : "Liches",
+    name : "liches",
+    number : 0,
+    profit : 32,
+    efficiency : 1,
+    efficiencyMax : 25,
+    nextCost : 150000,
+    nextEffCost : 500000,
+    unlock : false,
+    unlockCost:200000,
+}
+
+var monsterTab = [ spiders , skeletons , goblins , zombies , liches ];
 
 
 
@@ -83,6 +113,24 @@ function Save()
             nextEffCost : goblins.nextEffCost,
             unlock : goblins.unlock,
         },
+        zombies : {
+            number : zombies.number,
+            profit : zombies.profit,
+            efficiency : zombies.efficiency,
+            efficiencyMax : zombies.efficiencyMax,
+            nextCost : zombies.nextCost,
+            nextEffCost : zombies.nextEffCost,
+            unlock : zombies.unlock,
+        },
+        liches : {
+            number : liches.number,
+            profit : liches.profit,
+            efficiency : liches.efficiency,
+            efficiencyMax : liches.efficiencyMax,
+            nextCost : liches.nextCost,
+            nextEffCost : liches.nextEffCost,
+            unlock : liches.unlock,
+        },
 
 
         prestige: prestige,
@@ -104,13 +152,17 @@ function load()
         monsterTab.forEach(function(element) {
     console.log(element.name);
     console.log(saved);
-
-            if (typeof saved[element.name].number !== "undefined") element.number = saved[element.name].number;
-            if (typeof saved[element.name].nextCost !== "undefined") element.nextCost = saved[element.name].nextCost;
-            if (typeof saved[element.name].efficiency !== "undefined") element.efficiency = saved[element.name].efficiency;
-            if (typeof saved[element.name].nextEffCost !== "undefined") element.nextEffCost = saved[element.name].nextEffCost;
-            if (typeof saved[element.name].unlock !== "undefined") element.unlock = saved[element.name].unlock;
-
+            if(saved[element.name]) {
+                if (typeof saved[element.name].number !== "undefined") element.number = saved[element.name].number;
+                if (typeof saved[element.name].nextCost !== "undefined") element.nextCost = saved[element.name].nextCost;
+                if (typeof saved[element.name].efficiency !== "undefined") element.efficiency = saved[element.name].efficiency;
+                if (typeof saved[element.name].nextEffCost !== "undefined") element.nextEffCost = saved[element.name].nextEffCost;
+                if (typeof saved[element.name].unlock !== "undefined") element.unlock = saved[element.name].unlock;
+            }
+            else
+            {
+                console.log("new contenu");
+            }
         });
 
         if (typeof saved.golds !== "undefined") golds = saved.golds;
@@ -170,7 +222,7 @@ function load()
             else
             {
                 var elem1 = '<div class="invisible" id= "'+element.nameSingle+'Div">';
-                var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
+                var elem2 = '<button id="btnBuy'+element.namePrettify+'" class="btn btn-primary btn-lg extra-lg invisible" onclick="buyMonster('+element.name+')">Buy '+element.nameSinglePrettify+' </button><br />';
                 var elem3 = ''+element.namePrettify+' : <span class="badge" id="'+element.name+'">0</span><br /><br />';
                 //var elem4 = ''+element.nameSinglePrettify+' Cost : <span class="badge" id="'+element.name+'Cost">'+element.nextCost+'</span><br /><br />';
                 $('#interfaceLeft').append(elem1);
@@ -178,7 +230,7 @@ function load()
 
 
             }
-            var test = '<br /><img src="piece.png" alt="golds" height="20" width="20">  <span id="'+element.name+'Cost">'+element.nextCost+'</span> ';
+            var test = '<br /><img src="piece.png" alt="golds" height="20" width="20">  <span id="'+element.name+'Cost">'+element.nextCost+'</span>';
             $('#btnBuy'+element.namePrettify+'').append(test);
 
         });
@@ -233,13 +285,26 @@ function upEff(monster)
         if(monster.efficiency<monster.efficiencyMax)
         {
             golds = golds - monster.nextEffCost;
-            monster.efficiency=monster.efficiency+2;
+            monster.efficiency=monster.efficiency+0.5;
             monster.nextEffCost=monster.nextEffCost*2;
             document.getElementById(monster.name+"EffUp").innerHTML = "Upgrade "+monster.namePrettify+" <br />"+ prettify(monster.nextEffCost)+" golds";
             document.getElementById("golds").innerHTML = prettify(golds)
         }
 
     }
+}
+
+function downEff(monster)
+{
+
+        if(monster.efficiency>1)
+        {
+            monster.efficiency=monster.efficiency-0.5;
+            monster.nextEffCost=monster.nextEffCost/2;
+            document.getElementById(monster.name+"EffUp").innerHTML = "Upgrade "+monster.namePrettify+" <br />"+ prettify(monster.nextEffCost)+" golds";
+        }
+
+
 }
 
 
@@ -307,7 +372,7 @@ function engine(){
         else
             $('#'+element.name+'EffUp').addClass("disabled");
 
-        if(golds >= goblins.unlockCost)
+        if(golds >= element.unlockCost)
         {
             $('#'+element.name+'Unlock').removeClass("disabled");
         }
@@ -315,7 +380,7 @@ function engine(){
             $('#'+element.name+'Unlock').addClass("disabled");
 
 
-        if(golds >= goblins.unlockCost)
+        if(golds >= element.unlockCost)
         {
             $('#'+element.name+'Unlock').removeClass("disabled");
         }
@@ -357,10 +422,12 @@ function engine(){
     });
 
 
-    document.getElementById('titletext').innerHTML= ""+prettify(golds)+" golds";
+    document.getElementById('titletext').innerHTML= ""+prettify(golds)+" golds - Idle Game";
     setTimeout(engine,1000/FPS);
 }
 engine();
+
+
 
 
 $(".nav a").on("click", function(){
